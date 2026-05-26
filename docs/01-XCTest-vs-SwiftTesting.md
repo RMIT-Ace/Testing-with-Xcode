@@ -12,23 +12,141 @@ The table below maps them side by side across the features that matter day-to-da
 
 **TL;DR:** if you need UI testing or Objective-C support, you still need XCTest. For everything else, Swift Testing is the more expressive and forward-looking choice — and both can coexist in the same project, so there's no need to migrate all at once.
 
-| Feature | XCTest | Swift Testing |
-|---|---|---|
-| Since | Xcode 5+ (2013)| Xcode 16+, Swift 6  Modern (2024) |
-| UI Testing | ✅ XCUITest | ❌ Not supported |
-| Performance | ✅ measure {} | ❌ Not supported |
-| Parameterized | ❌ manual code | ✅ Native arguments |
-| Tags | ❌ Not supported | ✅ .tags() |
-| Cross-platform | 🍏 Apple only | ✅ Linux / Windows |
-| Objective-C | ✅ Full support | ❌ Swift only |
-| Xcode Test Plan | ✅ Full support | ✅ Full (from XCode 16+) |
-| SPM Support | ✅ Yes | ✅ Yes |
-| Coexistence | ✅ Yes | ✅ Yes |
-| Assertions | <pre><code>XCTAssertEqual(a, b)<br/>XCTAssertTrue(condition)<br/>XCTAssertNil(value)<br/>XCTAssertThrowsError(expr)<br/>XCTAssertGreaterThan(a, b)</code></pre>| <pre><code>#expect(condition)</code></pre> |
-| Test Declaration | <pre><code>import XCTest<br/>class SomeUnitTests: XCTestCase {<br>  func testSample(){<br/>    XCTAssertEqual(1, 1)<br/>  }<br/>}</code></pre>|<pre><code>import Testing<br/>struct MathTests {<br/>  @Test func someFeature() {<br/>     #expect(2 + 2 == 4)<br/>  }<br/>}|
-| Setup &<br/> Tear Down |<pre><code>override func setUp() { ... }<br/>override func tearDown() { ... }<br/>override func setUpWithError() throws { ... }</code></pre> |<pre><code>init() throws { /* setup */ }<br/>deinit { /* teardown */ }<br/>// Or actor isolation via<br/>// init() async throws</code></pre>|
-| Organisation &<br/>Tags | Grouped via class hierarchy.<br/>No native tagging.<br/>Use test plans or naming conventions.|<pre><code>@Suite("Auth", .tags(.critical))<br/>struct AuthTests { ... }<br/>@Test(.tags(.slow, .network))<br/>func fetchProfile() { ... }</code></pre> |
-| Concurrency | <pre><code>func testAsync() async throws {<br/>  let v = await fetchValue()<br/>  XCTAssertEqual(v, 42)<br/>}<br/>// Requires @MainActor for UI</code></pre> | <pre><code>@Test func asyncTest() async throws {<br/>  let v = await fetchValue()<br/>  #expect(v == 42)<br/>}<br/>// Actor isolation built-in</code></pre> |
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>XCTest</th>
+      <th>Swift Testing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Since</td>
+      <td>Xcode 5+ (2013)</td>
+      <td>Xcode 16+, Swift 6 (2024)</td>
+    </tr>
+    <tr>
+      <td>UI Testing</td>
+      <td>✅ XCUITest</td>
+      <td>❌ Not supported</td>
+    </tr>
+    <tr>
+      <td>Performance</td>
+      <td>✅ measure {}</td>
+      <td>❌ Not supported</td>
+    </tr>
+    <tr>
+      <td>Parameterized</td>
+      <td>❌ Manual code</td>
+      <td>✅ Native arguments</td>
+    </tr>
+    <tr>
+      <td>Tags</td>
+      <td>❌ Not supported</td>
+      <td>✅ .tags()</td>
+    </tr>
+    <tr>
+      <td>Cross-platform</td>
+      <td>🍏 Apple only</td>
+      <td>✅ Linux / Windows</td>
+    </tr>
+    <tr>
+      <td>Objective-C</td>
+      <td>✅ Full support</td>
+      <td>❌ Swift only</td>
+    </tr>
+    <tr>
+      <td>Xcode Test Plan</td>
+      <td>✅ Full support</td>
+      <td>✅ Full (from Xcode 16+)</td>
+    </tr>
+    <tr>
+      <td>SPM Support</td>
+      <td>✅ Yes</td>
+      <td>✅ Yes</td>
+    </tr>
+    <tr>
+      <td>Coexistence</td>
+      <td>✅ Yes</td>
+      <td>✅ Yes</td>
+    </tr>
+    <tr>
+      <td>Assertions</td>
+      <td>
+        <pre><code>XCTAssertEqual(a, b)
+XCTAssertTrue(condition)
+XCTAssertNil(value)
+XCTAssertThrowsError(expr)
+XCTAssertGreaterThan(a, b)</code></pre>
+      </td>
+      <td>
+        <pre><code>#expect(condition)
+// covers all cases above</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>Test Declaration</td>
+      <td>
+        <pre><code>import XCTest
+class SomeUnitTests: XCTestCase {
+  func testSample() {
+    XCTAssertEqual(1, 1)
+  }
+}</code></pre>
+      </td>
+      <td>
+        <pre><code>import Testing
+struct MathTests {
+  @Test func someFeature() {
+    #expect(2 + 2 == 4)
+  }
+}</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>Setup &amp; Tear Down</td>
+      <td>
+        <pre><code>override func setUp() { ... }
+override func tearDown() { ... }
+override func setUpWithError() throws { ... }</code></pre>
+      </td>
+      <td>
+        <pre><code>init() throws { /* setup */ }
+deinit { /* teardown */ }
+// Or actor isolation via:
+// init() async throws</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>Organisation &amp; Tags</td>
+      <td>Grouped via class hierarchy.<br/>No native tagging.<br/>Use test plans or naming conventions.</td>
+      <td>
+        <pre><code>@Suite("Auth", .tags(.critical))
+struct AuthTests { ... }
+@Test(.tags(.slow, .network))
+func fetchProfile() { ... }</code></pre>
+</td>
+</tr>
+<tr>
+<td>Concurrency</td>
+<td>
+<pre><code>func testAsync() async throws {
+let v = await fetchValue()
+XCTAssertEqual(v, 42)
+}
+// Requires @MainActor for UI</code></pre>
+</td>
+<td>
+<pre><code>@Test func asyncTest() async throws {
+let v = await fetchValue()
+#expect(v == 42)
+}
+// Actor isolation built-in</code></pre>
+</td>
+</tr>
+  </tbody>
+</table>
 
 "Two roads diverged in a wood, and I — I took the one less traveled by, and that has made all the difference." — Robert Frost
 
