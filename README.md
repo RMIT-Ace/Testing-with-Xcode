@@ -10,3 +10,5 @@ This series is publised [here](https://rmit-ace.github.io/Testing-with-Xcode/)
 [2 - Test Driven Development - TDD](docs/02-TestDrivenDevelopment.md)
 
 [3 - Applying TDD - First Test-Fail](docs/03-ApplyTDD-first-testfail.md)
+
+[4 - Applying TDD - First Test-Pass](docs/04-ApplyTDD-first-testpass.md)
