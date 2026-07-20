@@ -1,5 +1,6 @@
 # Applying TDD - UITests
 
+In the previous section we applied TDD to our unit tests. Now we take the same red-green cycle to the UI layer. Rather than testing logic in isolation, we'll use XCUITest to launch the real app and verify what the user actually sees - starting with something simple: confirming the app opens to the right screen. Along the way, we'll add a UI Testing Bundle target to the project and write our first XCUITest from scratch.
 
 ## Repository
 
