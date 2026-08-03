@@ -14,3 +14,5 @@ This series is publised [here](https://rmit-ace.github.io/Testing-with-Xcode/)
 [4 - Applying TDD - First Test-Pass](docs/04-ApplyTDD-first-testpass.md)
 
 [5 - Applying TDD - UI Tests](docs/05-TDD-UITests.md)
+
+[6 - Applying TDD - UI Tests (Continue)](docs/06-TDD-UITests-2.md)
