@@ -11,10 +11,12 @@ Why bother? Because untested code is where bugs hide. Coverage gives you:
 * **Smarter priorities:** you spend your testing effort on the gaps, not on code that's already covered.
 * **A health signal over time:** a falling percentage tells you new code is going out without tests.
 
+![](res/xcode-testcoverage-turnon.png)
+
 Xcode has coverage built in, yet most teams never switch it on. It works with both XCTest and Swift Testing, and turning it on takes about thirty seconds:
 
-1. **Edit Scheme → Test → Options**, then tick **Code Coverage**. You can gather it for all targets or only the ones you care about.
-2. **Optionally, use test plans** to set coverage per configuration, so your CI runs and local runs can behave differently.
+1. **Open your test plan** (Product → Test Plan → Edit Test Plan, or from the scheme editor), go to the **Configurations** tab, select **Shared Settings**, and turn on **Code Coverage**. You can gather it for all targets or only the ones you care about.
+2. **No test plan?** Use Edit Scheme → Test → Options and tick **Code Coverage** instead.
 3. **Run your tests (⌘U).** Coverage is recorded automatically into the `.xcresult` bundle.
 
 Then open the **Report navigator** to see coverage broken down by target, file and function, or turn on the gutter annotations in the source editor to see the lines your tests never ran.
