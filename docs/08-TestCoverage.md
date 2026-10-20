@@ -1,5 +1,7 @@
 # Test Coverage in Xcode
 
+![](res/xcode-testcoverage.png)
+
 Your tests pass and every diamond is green, but how much of your app did they actually exercise? __Test coverage is the percentage of your code that runs while your test suite runs__. Xcode measures it line by line, function by function and file by file. It doesn't judge whether your tests are good. It shows which code your tests reach and which code they never touch.
 
 Why bother? Because untested code is where bugs hide. Coverage gives you:
