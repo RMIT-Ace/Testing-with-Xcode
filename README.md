@@ -18,3 +18,5 @@ This series is publised [here](https://rmit-ace.github.io/Testing-with-Xcode/)
 [6 - Applying TDD - UI Tests (Continue)](docs/06-TDD-UITests-2.md)
 
 [7 - Applying TDD - UI Test Map & Location](docs/07-TDD-UITests.md)
+
+[8 - Test Coverage](docs/08-TestCoverage.md)
